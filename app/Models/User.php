@@ -11,6 +11,9 @@ class User extends Authenticatable
 {
     const ROLE_CLIENTE = 'cliente';
 
+    use Notifiable;
+
+    
     use HasFactory, Notifiable;
 
     /**
@@ -55,5 +58,6 @@ class User extends Authenticatable
 
     public function cliente(){
         return $this->hasOne(Cliente::class, 'user_id', 'id');
+        
     }
 }
