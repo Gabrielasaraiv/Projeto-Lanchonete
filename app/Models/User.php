@@ -9,6 +9,8 @@ use Illuminate\Notifications\Notifiable;
 
 class User extends Authenticatable
 {
+    const ROLE_CLIENTE = 'cliente';
+
     use HasFactory, Notifiable;
 
     /**
@@ -20,6 +22,7 @@ class User extends Authenticatable
         'name',
         'email',
         'password',
+        'role'
     ];
 
     /**
@@ -43,5 +46,14 @@ class User extends Authenticatable
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
         ];
+    }
+
+    public function isCliente()
+    {
+        return $this->role == self::ROLE_CLIENTE;
+    }
+
+    public function cliente(){
+        return $this->hasOne(Cliente::class, 'user_id', 'id');
     }
 }
